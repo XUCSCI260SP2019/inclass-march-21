@@ -4,6 +4,11 @@ public class Hero {
     private String name;
     private Integer id;
 
+    public Hero() {}
+    public Hero(Integer id, String name) {
+        this.id = id;
+        this.name = name;
+    }
     public Integer getId() {
         return id;
     }
