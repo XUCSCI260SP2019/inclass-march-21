@@ -2,9 +2,12 @@ package edu.xavier.csci.inclass.inclassservice;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 @RestController
 public class CustomerController {
@@ -12,6 +15,8 @@ public class CustomerController {
 
     private Random random = new Random();
     private static Map<Integer, Hero> heros = new HashMap<>();
+
+
 
     static {
         heros.put(11, new Hero(11, "Mr. Nice"));
@@ -43,6 +48,7 @@ public class CustomerController {
     public Response add(@RequestBody Hero hero) {
 
         Response r = new Response();
+
         r.setCode(200);
         r.setType("Hero Added: " + hero.getId());
 
@@ -64,11 +70,14 @@ public class CustomerController {
     @CrossOrigin(origins = "http://localhost:4200")
     @GetMapping("/hero/{id}")
     public Hero getHero(@PathVariable("id") Integer id) {
-
         System.out.println("Getting hero " + id);
-
-
         return heros.get(id);
+    }
+
+    @PostMapping("/foo")
+    public String foo(@RequestBody List<String> x) {
+
+        return "hi";
     }
 
 }
